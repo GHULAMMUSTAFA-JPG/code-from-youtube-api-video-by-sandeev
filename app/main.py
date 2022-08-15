@@ -1,5 +1,5 @@
 # from passlib.context import CryptContext
-
+from fastapi.middleware.cors import CORSMiddleware
 # from fastapi import FastAPI ,Response , status,HTTPException, Depends
 from fastapi import FastAPI
 # from fastapi.params import Body
@@ -21,11 +21,19 @@ from .config import settings
 models.Base.metadata.create_all(bind=engine)
 
 app= FastAPI()
+origins = ["*"]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
     
-my_post = [{"title": "title of post 1", "content" : " content of post 1 ", "id" : 1 }   ,
-            {"title" : "title of post 2", "content" : " content of post 2 ", "id" : 2  }]
+# my_post = [{"title": "title of post 1", "content" : " content of post 1 ", "id" : 1 }   ,
+#             {"title" : "title of post 2", "content" : " content of post 2 ", "id" : 2  }]
 
 
 app.include_router(post.router)

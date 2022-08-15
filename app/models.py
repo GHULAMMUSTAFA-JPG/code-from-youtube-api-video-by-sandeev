@@ -33,7 +33,7 @@ class User(Base):
                         nullable=False, server_default=text('now()'))
     email=Column(String,nullable=False,unique=True)
     password=Column(String,nullable=True)
-    
+    phone_number=Column(String)
     
 
 
